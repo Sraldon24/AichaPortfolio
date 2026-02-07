@@ -1,0 +1,19 @@
+{
+    "name": "portfolio-theme",
+    "version": "1.0.0",
+    "description": "Tailwind CSS build for Portfolio",
+    "main": "index.js",
+    "scripts": {
+        "build:css": "tailwindcss -i ./portfolio/static/css/input.css -o ./portfolio/static/css/styles.css --minify",
+        "watch:css": "tailwindcss -i ./portfolio/static/css/input.css -o ./portfolio/static/css/styles.css --watch",
+        "format": "prettier --write ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "prettier": "^3.2.5",
+        "prettier-plugin-tailwindcss": "^0.5.11",
+        "tailwindcss": "^3.4.1"
+    }
+}

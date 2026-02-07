@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block title %}Page Not Found - Portfolio{% endblock %} {% block content %}
+<section class="flex min-h-[70vh] flex-col items-center justify-center px-4 text-center">
+    <div class="glass-card mx-auto max-w-lg space-y-6 p-12">
+        <h1 class="font-serif text-6xl font-bold text-gray-900">404</h1>
+        <h2 class="font-serif text-2xl text-gray-700">Page Not Found</h2>
+        <p class="text-gray-600">The art piece you are looking for seems to have been moved or doesn't exist.</p>
+        <div class="pt-6">
+            <a href="{% url 'index' %}" class="btn-primary border-none bg-black text-white hover:bg-gray-800">
+                Return to Gallery
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

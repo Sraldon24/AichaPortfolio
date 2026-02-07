@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .glass-card {
+        @apply rounded-2xl border border-white/30 bg-white/20 shadow-xl backdrop-blur-md transition-all duration-300 hover:shadow-2xl;
+    }
+
+    .btn-primary {
+        @apply rounded-full border border-white/40 bg-white px-8 py-3 font-medium text-gray-900 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl;
+    }
+}
+
+/* Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:
+        opacity 0.5s ease-out,
+        visibility 0.5s ease-out;
+}
+
+#preloader.loaded {
+    opacity: 0;
+    visibility: hidden;
+}

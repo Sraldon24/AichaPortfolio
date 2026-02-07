@@ -1,0 +1,156 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Portfolio{% endblock %}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+    <!-- Alpine.js for interactions -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body
+    class="relative min-h-screen overflow-x-hidden bg-pastel-pink font-sans text-dark-text selection:bg-purple-200 selection:text-purple-900">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="space-y-4 text-center">
+            <div class="animate-pulse font-serif text-4xl font-bold text-gray-900">Loading Artistry...</div>
+            <div class="mx-auto h-1 w-32 overflow-hidden rounded-full bg-gray-200">
+                <div class="h-full animate-[preloader_1.5s_infinite_ease-in-out] bg-purple-600"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.getElementById('preloader').classList.add('loaded');
+            }, 800); // Slight delay for effect
+        });
+    </script>
+
+    <!-- Background Image Layer -->
+    <div class="pointer-events-none fixed inset-0 z-0 select-none">
+        <img src="{% static 'img/background.png' %}" alt="Background"
+            class="h-full w-full object-cover object-center opacity-80 blur-[2px]" />
+        <div class="absolute inset-0 bg-white/30 backdrop-blur-[1px]"></div>
+
+        <!-- Animated Blobs for "Crazy" Effect -->
+        <div
+            class="absolute -left-4 top-0 h-72 w-72 animate-blob rounded-full bg-purple-300 opacity-30 mix-blend-multiply blur-xl filter">
+        </div>
+        <div
+            class="animation-delay-2000 absolute -right-4 top-0 h-72 w-72 animate-blob rounded-full bg-yellow-300 opacity-30 mix-blend-multiply blur-xl filter">
+        </div>
+        <div
+            class="animation-delay-4000 absolute -bottom-8 left-20 h-72 w-72 animate-blob rounded-full bg-pink-300 opacity-30 mix-blend-multiply blur-xl filter">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed z-50 w-full transition-all duration-300"
+        :class="{ 'bg-white/70 backdrop-blur-md shadow-sm': scrolled, 'bg-transparent': !scrolled }"
+        x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
+        <div class="container mx-auto flex items-center justify-between px-6 py-4">
+            <a href="{% url 'index' %}"
+                class="font-serif text-2xl font-bold tracking-tighter text-gray-800 transition-colors hover:text-purple-700"
+                {% if profile %}{{ profile.name|default:"Portfolio"|slice:":2" }}{% else %}A.I.{% endif %} </a>
+
+                <div class="hidden space-x-8 md:flex">
+                    <a href="{% url 'index' %}#portfolio" <a href="{% url 'index' %}#about"
+                        class="text-sm font-medium transition-colors hover:text-purple-600" <a
+                        href="{% url 'index' %}#contact"
+                        class="transform rounded-full bg-black px-5 py-2 text-sm text-white transition-all hover:scale-105 hover:bg-gray-800"
+                        </div>
+
+                        <!-- Mobile Menu Button -->
+                        <button @click="open = !open" class="focus:outline-none md:hidden">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16">
+                                </path>
+                            </svg>
+                        </button>
+                </div>
+
+                <!-- Global Toast Notification -->
+                {% if messages %}
+                <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-2" x-data="{ show: true }"
+                    x-init="setTimeout(() => show = false, 5000)" x-show="show"
+                    x-transition:enter="transform ease-out duration-300 transition"
+                    x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+                    x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0"
+                    x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0">
+                    {% for message in messages %}
+                    <div
+                        class="glass-card flex items-center gap-3 rounded-lg border border-white/20 bg-white/10 px-6 py-4 shadow-xl backdrop-blur-md">
+                        {% if message.tags == 'success' %}
+                        <div
+                            class="flex h-8 w-8 items-center justify-center rounded-full bg-green-400/20 text-green-400">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        {% else %}
+                        <div class="flex h-8 w-8 items-center justify-center rounded-full bg-red-400/20 text-red-400">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </div>
+                        {% endif %}
+                        <div>
+                            <h4 class="font-serif text-sm font-bold text-white">Notification</h4>
+                            <p class="text-xs text-gray-300">{{ message }}</p>
+                        </div>
+                        <button @click="show = false" class="ml-4 text-gray-400 hover:text-white">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <!-- Mobile Menu -->
+                <div x-show="open" @click.away="open = false" x-transition
+                    class="absolute w-full space-y-4 border-b border-gray-100 bg-white/95 p-6 shadow-xl backdrop-blur-xl md:hidden">
+                    <a href="{% url 'index' %}#portfolio" class="block font-serif text-lg text-gray-800"
+                        @click="open = false">Portfolio</a>
+                    <a href="{% url 'index' %}#about" class="block font-serif text-lg text-gray-800"
+                        @click="open = false">About</a>
+                    <a href="{% url 'index' %}#contact" class="block font-serif text-lg text-gray-800"
+                        @click="open = false">Contact</a>
+                </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10 pt-20">{% block content %}{% endblock %}</main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 mt-20 border-t border-white/20 bg-white/40 py-12 backdrop-blur-sm">
+        <div class="container mx-auto px-6 text-center">
+            <p class="font-serif text-sm italic text-gray-600">
+                &copy; {% now "Y" %} {% if profile %}{{ profile.name }}{% else %}Portfolio{% endif %}. All rights
+                reserved.
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>

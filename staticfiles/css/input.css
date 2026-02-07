@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply font-sans text-dark-text antialiased;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-serif;
+    }
+}
+
+@layer components {
+    .glass-card {
+        @apply rounded-xl border border-glass-border bg-glass-white shadow-lg backdrop-blur-md;
+    }
+    .btn-primary {
+        @apply rounded-full border border-white/40 bg-white/20 px-6 py-3 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/30;
+    }
+}
