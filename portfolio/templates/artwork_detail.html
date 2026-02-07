@@ -1,18 +1,16 @@
-{% extends 'base.html' %} {% load static %} {% block title %}{{ artwork.title }} - Portfolio{% endblock %} {% block
-content %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ artwork.title }} - Portfolio{% endblock %}
+
+{% block content %}
 <div class="flex min-h-screen items-center pb-12 pt-24">
     <div class="container mx-auto px-6">
         <!-- Back Link -->
-        <a
-            href="{% url 'index' %}#portfolio"
-            class="group mb-8 inline-flex items-center text-gray-500 transition-colors hover:text-purple-600"
-        >
-            <svg
-                class="mr-2 h-5 w-5 transform transition-transform group-hover:-translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-            >
+        <a href="{% url 'index' %}#portfolio"
+            class="group mb-8 inline-flex items-center text-gray-500 transition-colors hover:text-purple-600">
+            <svg class="mr-2 h-5 w-5 transform transition-transform group-hover:-translate-x-1" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
             Back to Gallery
@@ -25,21 +23,13 @@ content %}
                     <div class="overflow-hidden rounded-lg bg-gray-100/50 shadow-sm">
                         {% if artwork.video_url %}
                         <div class="aspect-video">
-                            <iframe
-                                src="{{ artwork.video_url }}"
-                                class="h-full w-full"
-                                frameborder="0"
-                                allow="autoplay; fullscreen; picture-in-picture"
-                                allowfullscreen
-                            ></iframe>
+                            <iframe src="{{ artwork.video_url }}" class="h-full w-full" frameborder="0"
+                                allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         {% elif artwork.image %}
                         <div class="aspect-[4/5]">
-                            <img
-                                src="{{ artwork.image.url }}"
-                                alt="{{ artwork.title }}"
-                                class="h-full w-full object-cover"
-                            />
+                            <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}"
+                                class="h-full w-full object-cover" />
                         </div>
                         {% endif %}
                     </div>
@@ -53,8 +43,7 @@ content %}
                         </h1>
                         {% if artwork.category %}
                         <span
-                            class="inline-block rounded-full border border-purple-100 bg-purple-50 px-3 py-1 text-xs font-medium uppercase tracking-wider text-purple-600"
-                        >
+                            class="inline-block rounded-full border border-purple-100 bg-purple-50 px-3 py-1 text-xs font-medium uppercase tracking-wider text-purple-600">
                             {{ artwork.get_category_display }}
                         </span>
                         {% endif %}
@@ -66,15 +55,22 @@ content %}
                             <span class="text-xs font-medium uppercase tracking-widest text-gray-500">Medium</span>
                             <span class="col-span-2 font-serif text-gray-900">{{ artwork.medium }}</span>
                         </div>
-                        {% endif %} {% if artwork.year or artwork.completion_date %}
+                        {% endif %}
+
+                        {% if artwork.year or artwork.completion_date %}
                         <div class="grid grid-cols-3">
                             <span class="text-xs font-medium uppercase tracking-widest text-gray-500">Date</span>
                             <span class="col-span-2 font-serif text-gray-900">
-                                {% if artwork.completion_date %} {{ artwork.completion_date|date:"F Y" }} {% else %} {{
-                                artwork.year }} {% endif %}
+                                {% if artwork.completion_date %}
+                                {{ artwork.completion_date|date:"F Y" }}
+                                {% else %}
+                                {{ artwork.year }}
+                                {% endif %}
                             </span>
                         </div>
-                        {% endif %} {% if artwork.dimensions %}
+                        {% endif %}
+
+                        {% if artwork.dimensions %}
                         <div class="grid grid-cols-3">
                             <span class="text-xs font-medium uppercase tracking-widest text-gray-500">Dimensions</span>
                             <span class="col-span-2 font-serif text-gray-900">{{ artwork.dimensions }}</span>
@@ -83,7 +79,8 @@ content %}
                     </div>
 
                     <div class="prose prose-gray leading-relaxed text-gray-600">
-                        {{ artwork.description|linebreaks }} {% if artwork.content %}
+                        {{ artwork.description|linebreaks }}
+                        {% if artwork.content %}
                         <div class="mt-6 border-t border-dashed border-gray-300 pt-6">
                             {{ artwork.content|linebreaks }}
                         </div>
@@ -92,9 +89,6 @@ content %}
                 </div>
             </div>
         </div>
-
-        <!-- Navigation Between Works (Optional, basic implementation) -->
-        <!-- Future: Add Prev/Next logic in view -->
     </div>
 </div>
 {% endblock %}

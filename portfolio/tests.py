@@ -90,7 +90,7 @@ class ViewTests(TestCase):
         # Check success message in response
         messages = list(response.context['messages'])
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), "Your message has been sent successfully!")
+        self.assertEqual(str(messages[0]), "Message received! I'll get back to you soon.")
 
     def test_contact_form_submission_spam(self):
         """Test spam contact form submission via view."""
