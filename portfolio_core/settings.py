@@ -189,6 +189,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Cloudinary Storage
+# Cloudinary Storage
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': env('CLOUDINARY_CLOUD_NAME', default=''),
     'API_KEY': env('CLOUDINARY_API_KEY', default=''),
@@ -197,6 +198,9 @@ CLOUDINARY_STORAGE = {
 
 if env('CLOUDINARY_CLOUD_NAME', default=''):
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+else:
+    # Fallback to local storage (for Railway Volumes)
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 # Email Settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
