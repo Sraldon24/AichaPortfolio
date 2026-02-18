@@ -141,9 +141,15 @@ WSGI_APPLICATION = 'portfolio_core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': env.db('DATABASE_URL', default=f'sqlite:///{BASE_DIR / "db.sqlite3"}')
-}
+# Handle Railway's DATABASE_PUBLIC_URL or standard DATABASE_URL
+if env('DATABASE_PUBLIC_URL', default=None):
+    DATABASES = {
+        'default': env.db('DATABASE_PUBLIC_URL')
+    }
+else:
+    DATABASES = {
+        'default': env.db('DATABASE_URL', default=f'sqlite:///{BASE_DIR / "db.sqlite3"}')
+    }
 
 
 # Password validation
