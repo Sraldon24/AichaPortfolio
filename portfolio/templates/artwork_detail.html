@@ -19,20 +19,41 @@
         <div class="glass-card p-8 md:p-12">
             <div class="grid items-start gap-12 md:grid-cols-2">
                 <!-- Image/Video Side -->
-                <div class="group relative">
-                    <div class="overflow-hidden rounded-lg bg-gray-100/50 shadow-sm">
+                <div class="group relative flex flex-col gap-6">
+                    <div class="overflow-hidden rounded-lg bg-gray-100/50 shadow-sm flex items-center justify-center">
                         {% if artwork.video_url %}
-                        <div class="aspect-video">
+                        <div class="aspect-video w-full">
                             <iframe src="{{ artwork.video_url }}" class="h-full w-full" frameborder="0"
                                 allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         {% elif artwork.image %}
-                        <div class="aspect-[4/5]">
+                        <div class="w-full">
                             <img src="{{ artwork.image.url }}" alt="{{ artwork.title }}"
-                                class="h-full w-full object-cover" />
+                                class="w-full h-auto object-contain" />
                         </div>
                         {% endif %}
                     </div>
+
+                    {% if artwork.image_2 %}
+                    <div class="overflow-hidden rounded-lg bg-gray-100/50 shadow-sm flex items-center justify-center">
+                        <img src="{{ artwork.image_2.url }}" alt="{{ artwork.title }} - Image 2"
+                            class="w-full h-auto object-contain" />
+                    </div>
+                    {% endif %}
+
+                    {% if artwork.image_3 %}
+                    <div class="overflow-hidden rounded-lg bg-gray-100/50 shadow-sm flex items-center justify-center">
+                        <img src="{{ artwork.image_3.url }}" alt="{{ artwork.title }} - Image 3"
+                            class="w-full h-auto object-contain" />
+                    </div>
+                    {% endif %}
+
+                    {% if artwork.image_4 %}
+                    <div class="overflow-hidden rounded-lg bg-gray-100/50 shadow-sm flex items-center justify-center">
+                        <img src="{{ artwork.image_4.url }}" alt="{{ artwork.title }} - Image 4"
+                            class="w-full h-auto object-contain" />
+                    </div>
+                    {% endif %}
                 </div>
 
                 <!-- Info Side -->

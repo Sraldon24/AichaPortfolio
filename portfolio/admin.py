@@ -37,6 +37,18 @@ class ArtworkAdmin(ModelAdmin):
     list_filter = ('category', 'is_featured', 'year', 'completion_date')
     search_fields = ('title', 'description', 'medium')
     prepopulated_fields = {'slug': ('title',)}
+    
+    fieldsets = (
+        ("Basic Information", {
+            "fields": ('title', 'slug', 'category', 'medium', 'dimensions', 'year', 'completion_date', 'order', 'is_featured')
+        }),
+        ("Images & Media", {
+            "fields": ('image', 'image_2', 'image_3', 'image_4', 'video_url')
+        }),
+        ("Content", {
+            "fields": ('description', 'content')
+        })
+    )
 
 @admin.register(Message)
 class MessageAdmin(ModelAdmin):
