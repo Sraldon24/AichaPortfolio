@@ -51,6 +51,7 @@ class Artwork(models.Model):
     description = models.TextField(help_text="Short description for the gallery overlay")
     content = models.TextField(blank=True, help_text="Full details/story for the detail view")
     video_url = models.URLField(blank=True, help_text="URL to video (YouTube/Vimeo) or animation")
+    video_file = models.FileField(upload_to='videos/', blank=True, null=True, help_text="Upload a video file (MP4, WebM)")
     order = models.PositiveIntegerField(default=0, help_text="Order in the gallery (lower numbers first)")
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

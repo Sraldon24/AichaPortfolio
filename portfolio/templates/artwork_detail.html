@@ -21,7 +21,14 @@
                 <!-- Image/Video Side -->
                 <div class="group relative flex flex-col gap-6">
                     <div class="overflow-hidden rounded-lg bg-gray-100/50 shadow-sm flex items-center justify-center">
-                        {% if artwork.video_url %}
+                        {% if artwork.video_file %}
+                        <div class="w-full">
+                            <video controls class="w-full h-auto object-contain bg-black">
+                                <source src="{{ artwork.video_file.url }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        {% elif artwork.video_url %}
                         <div class="aspect-video w-full">
                             <iframe src="{{ artwork.video_url }}" class="h-full w-full" frameborder="0"
                                 allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
