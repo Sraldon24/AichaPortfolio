@@ -40,7 +40,7 @@ class ArtworkAdmin(ModelAdmin):
     
     fieldsets = (
         ("Basic Information", {
-            "fields": ('title', 'slug', 'category', 'medium', 'dimensions', 'year', 'completion_date', 'order', 'is_featured')
+            "fields": ('title', 'slug', 'category', 'medium', 'program', 'dimensions', 'year', 'completion_date', 'order', 'is_featured')
         }),
         ("Images & Media", {
             "fields": ('image', 'image_2', 'image_3', 'image_4', 'video_url', 'video_file')

@@ -45,6 +45,7 @@ class Artwork(models.Model):
     image_3 = models.ImageField(upload_to='artwork/', blank=True, null=True, help_text="Optional third image")
     image_4 = models.ImageField(upload_to='artwork/', blank=True, null=True, help_text="Optional fourth image")
     medium = models.CharField(max_length=100, blank=True, help_text="e.g. Oil on Canvas")
+    program = models.CharField(max_length=100, blank=True, help_text="Software used, e.g. Photoshop, Blender")
     dimensions = models.CharField(max_length=50, blank=True, help_text='e.g. 36" x 48"')
     year = models.IntegerField(blank=True, null=True)
     completion_date = models.DateField(blank=True, null=True, help_text="Date the artwork was completed")

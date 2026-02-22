@@ -85,6 +85,13 @@
                         </div>
                         {% endif %}
 
+                        {% if artwork.program %}
+                        <div class="grid grid-cols-3">
+                            <span class="text-xs font-medium uppercase tracking-widest text-gray-500">Program</span>
+                            <span class="col-span-2 font-serif text-gray-900">{{ artwork.program }}</span>
+                        </div>
+                        {% endif %}
+
                         {% if artwork.year or artwork.completion_date %}
                         <div class="grid grid-cols-3">
                             <span class="text-xs font-medium uppercase tracking-widest text-gray-500">Date</span>
