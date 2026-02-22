@@ -3,6 +3,7 @@ from django.db import models
 class Profile(models.Model):
     name = models.CharField(max_length=100)
     portrait = models.ImageField(upload_to='profile/', blank=True, null=True, help_text="Photo for About Me section")
+    about_title = models.CharField(max_length=100, default="About Me", help_text="Title for the About section")
     introduction = models.TextField()
     bio = models.TextField(blank=True)
     resume = models.FileField(upload_to='resume/', blank=True, null=True)

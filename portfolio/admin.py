@@ -10,9 +10,21 @@ admin.site.unregister(User)
 class UserAdmin(BaseUserAdmin, ModelAdmin):
     pass
 
+from django.utils.html import format_html
+
 @admin.register(Profile)
 class ProfileAdmin(ModelAdmin):
     list_display = ('name', 'introduction')
+    readonly_fields = ('download_resume_button',)
+
+    def download_resume_button(self, obj):
+        if obj.resume:
+            return format_html(
+                '<a href="{}" download class="bg-primary-600 border border-transparent font-medium rounded-md text-white px-3 py-2 text-sm hover:bg-primary-700 transition-colors">Download Resume</a>',
+                obj.resume.url
+            )
+        return "No resume uploaded"
+    download_resume_button.short_description = "Resume Download"
 
 @admin.register(Skill)
 class SkillAdmin(ModelAdmin):
